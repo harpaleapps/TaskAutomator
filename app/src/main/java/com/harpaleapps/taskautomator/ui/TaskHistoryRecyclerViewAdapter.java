@@ -15,12 +15,12 @@ import java.util.ArrayList;
 public class TaskHistoryRecyclerViewAdapter extends RecyclerView
         .Adapter<TaskHistoryRecyclerViewAdapter.DataObjectHolder> {
     private static String LOG_TAG = "TaskHistoryRecyclerViewAdapter";
-    private ArrayList<ViewModel> mDataset;
+    private final int rowLayoutId;
+    private ArrayList<ViewModel> mDataset = new ArrayList<>();
     private static MyClickListener myClickListener;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
-            implements View
-            .OnClickListener {
+            implements View.OnClickListener {
         TextView label;
         TextView dateTime;
 
@@ -34,7 +34,9 @@ public class TaskHistoryRecyclerViewAdapter extends RecyclerView
 
         @Override
         public void onClick(View v) {
-            myClickListener.onItemClick(getAdapterPosition(), v);
+            if (myClickListener != null) {
+                myClickListener.onItemClick(getAdapterPosition(), v);
+            }
         }
     }
 
@@ -42,14 +44,14 @@ public class TaskHistoryRecyclerViewAdapter extends RecyclerView
         this.myClickListener = myClickListener;
     }
 
-    public TaskHistoryRecyclerViewAdapter(ArrayList<ViewModel> myDataset) {
-        mDataset = myDataset;
+    public TaskHistoryRecyclerViewAdapter(int rowLayoutId) {
+        this.rowLayoutId = rowLayoutId;
     }
 
     @Override
     public DataObjectHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.history_task_list_row_view, parent, false);
+                .inflate(rowLayoutId, parent, false);
         return new DataObjectHolder(view);
     }
 
@@ -57,6 +59,11 @@ public class TaskHistoryRecyclerViewAdapter extends RecyclerView
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         holder.label.setText(mDataset.get(position).getName());
         holder.dateTime.setText(mDataset.get(position).getDescription());
+    }
+
+    public void addItems(ArrayList<ViewModel> dataset) {
+        mDataset.addAll(dataset);
+        notifyDataSetChanged();
     }
 
     public void addItem(ViewModel dataObj, int index) {
@@ -67,6 +74,11 @@ public class TaskHistoryRecyclerViewAdapter extends RecyclerView
     public void deleteItem(int index) {
         mDataset.remove(index);
         notifyItemRemoved(index);
+    }
+
+    public void deleteAll() {
+        mDataset.clear();
+        notifyDataSetChanged();
     }
 
     @Override
