@@ -1,8 +1,10 @@
-package com.harpaleapps.taskautomator;
+package com.harpaleapps.taskautomator.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,8 +15,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.harpaleapps.taskautomator.R;
+import com.harpaleapps.taskautomator.modle.ViewModel;
+
+import java.util.ArrayList;
+
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private RecyclerView mTaskHistoryRecyclerView;
+    private TaskHistoryRecyclerViewAdapter mTaskHistoryRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +51,14 @@ public class DashboardActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mTaskHistoryRecyclerView = findViewById(R.id.taskHistoryRecyclerView);
+        mTaskHistoryRecyclerView = (RecyclerView) findViewById(R.id.taskHistoryRecyclerView);
+        mTaskHistoryRecyclerView.setHasFixedSize(true);
+        mTaskHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mTaskHistoryRecyclerViewAdapter = new TaskHistoryRecyclerViewAdapter(getDataSet());
+        mTaskHistoryRecyclerView.setAdapter(mTaskHistoryRecyclerViewAdapter);
+
     }
 
     @Override
@@ -90,4 +108,14 @@ public class DashboardActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    private ArrayList<ViewModel> getDataSet() {
+        ArrayList results = new ArrayList<ViewModel>();
+        for (int index = 0; index < 20; index++) {
+            ViewModel obj = new ViewModel("Some Primary Text " + index,
+                    "Secondary " + index);
+            results.add(index, obj);
+        }
+        return results;
+    }
+
 }
