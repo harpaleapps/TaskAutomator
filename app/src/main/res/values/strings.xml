@@ -6,4 +6,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="find_my_phone">Find My Phone</string>
+    <string name="view_action_catalogue">View Actions Catalogue</string>
+    <string name="setting">Setting</string>
 </resources>
