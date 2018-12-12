@@ -115,7 +115,7 @@ public class DashboardActivity extends AppCompatActivity
         ArrayList results = new ArrayList<ViewModel>();
         for (int index = 0; index < 20; index++) {
             ViewModel obj = new ViewModel("Some Primary Text " + index,
-                    "Secondary " + index);
+                    "Task short description upto 100 charsTask short description upto 100 1");
             results.add(index, obj);
         }
         return results;
