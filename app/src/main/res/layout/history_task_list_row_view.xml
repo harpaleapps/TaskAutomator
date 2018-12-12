@@ -44,7 +44,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/colorAccent" />
+                    android:background="@color/colorAccent"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -66,16 +66,15 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:gravity="center"
                 android:orientation="vertical"
                 android:weightSum="2">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:gravity="end"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingBottom="5dp">
+                    android:paddingBottom="20dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -87,9 +86,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:gravity="end"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingTop="5dp">
+                    android:paddingTop="20dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
